@@ -45,7 +45,9 @@ const Intro = () => {
             Know me More
           </button>
           <button className="px-6 py-2 border border-gray-400 text-gray-700 font-medium rounded-xl hover:bg-gray-100">
-            Contact Me
+            <a href="https://t.me/SOTHEABAN">
+                Contact Me
+            </a>
           </button>
         </div>
       </div>

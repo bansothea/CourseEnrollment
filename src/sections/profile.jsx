@@ -18,17 +18,23 @@ const ProfileComponent = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (showResume) {
+      // Defer scroll to after DOM is painted
+      setTimeout(() => {
+        resumeRef.current?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+  }, [showResume]);
+
   const handleShowResume = () => {
     setShowResume(true);
-    setTimeout(() => {
-      resumeRef.current?.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
   };
 
   return (
-    <section className="min-h-[100vh] overflow-y-auto">
-      <div className="relative min-h-screen bg-white text-black">
-        <div className="container mx-auto px-6 max-w-7xl relative z-10 py-16">
+    <section className="h-screen overflow-y-auto">
+      <div className="bg-white text-black">
+        <div className="container mx-auto px-6 max-w-7xl relative z-10 py-16 min-h-[calc(100vh-4rem)]">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className={`lg:col-span-5 flex flex-col items-center lg:items-start text-center lg:text-left transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
               <div className="relative mb-8 group">
@@ -48,17 +54,28 @@ const ProfileComponent = () => {
               <p className="text-gray-600 mb-8 font-light text-lg">Software Engineer</p>
 
               <div className="flex space-x-3">
-                {[Instagram, Facebook, Twitter, Linkedin, Github].map((Icon, idx) => (
-                  <a
-                    key={idx}
-                    href="#"
-                    className="p-2 rounded-lg border border-gray-200 hover:bg-black hover:text-white hover:border-black transition-all duration-300 transform hover:-translate-y-1"
-                  >
-                    <Icon size={18} />
-                    <span className="sr-only">Social</span>
-                  </a>
-                ))}
-              </div>
+                    {[
+                        { 
+                        Icon: Linkedin, 
+                        url: 'https://www.linkedin.com/in/sothea-ban-059780236/' 
+                        },
+                        { 
+                        Icon: Github, 
+                        url: 'https://github.com/Thea-zin' 
+                        }
+                    ].map(({ Icon, url }, idx) => (
+                        <a
+                        key={url}  // Using URL as key is better than index
+                        href={url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2 rounded-lg border border-gray-200 hover:bg-black hover:text-white hover:border-black transition-all duration-300 transform hover:-translate-y-1"
+                        >
+                        <Icon size={18} />
+                        <span className="sr-only">{Icon.name}</span>
+                        </a>
+                    ))}
+                </div>
             </div>
 
             <div className={`lg:col-span-7 flex flex-col transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
@@ -99,14 +116,14 @@ const ProfileComponent = () => {
               </div>
             </div>
           </div>
+
+          {showResume && (
+            <div ref={resumeRef} className="mt-20 resume-section">
+            <ResumePage />
+          </div>
+          )}
         </div>
       </div>
-
-      {showResume && (
-        <div ref={resumeRef}>
-          <ResumePage />
-        </div>
-      )}
     </section>
   );
 };

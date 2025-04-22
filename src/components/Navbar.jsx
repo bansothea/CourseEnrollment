@@ -1,6 +1,6 @@
 import React from 'react'
 
-const navbar = () => {
+const Navbar = () => {
   return (
     <div className="">
       <nav className="w-full fixed bottom-6 flex justify-center z-50 px-4">
@@ -14,4 +14,4 @@ const navbar = () => {
   )
 }
 
-export default navbar
+export default Navbar

@@ -46,9 +46,14 @@ const RequirementsAndOutcomes = () => {
               </li>
             ))}
           </ul>
-          <button className="w-full mt-8 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium py-3 rounded-xl">
-            Enroll Now
-          </button>
+            <a
+                href="https://docs.google.com/forms/d/e/1FAIpQLSd2G_9NVYBeg_jUPz6Pvpe2z_yPxOoDxnneettJo644ww0iPQ/viewform?usp=dialog"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full mt-8 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium py-3 rounded-xl text-center"
+                >
+                Enroll Now
+            </a>
         </div>
       </div>
     </section>

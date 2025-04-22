@@ -1,4 +1,4 @@
-import Navbar from "../components/navbar";
+import Navbar from "../components/Navbar";
 import Logo from "../components/logo";
 const MainLayout = ({ children }) => {
   return (
